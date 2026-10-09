@@ -1,3 +1,5 @@
+package login;
+@SuppressWarnings("PMD.MethodArgumentCouldBeFinal")
 public class AuthService {
   private final UsuarioRepositorio usuarioRepo;
 
@@ -7,21 +9,21 @@ public class AuthService {
 
   public Usuario login(String nombre, String clave) {
     if (nombre == null || nombre.isBlank()) {
-      throw new IllegalArgumentException("El nombre de usuario es obligatorio");
+      throw new IllegalArgumentException("Error de Autenticación: El nombre de usuario es     obligatorio");
     }
 
     if (clave == null || clave.isBlank()) {
-      throw new IllegalArgumentException("La contraseña es obligatoria.");
+      throw new IllegalArgumentException("Error de Autenticación: La contraseña es obligatoria.");
     }
 
     Usuario usuario = usuarioRepo.findByUsuario(nombre);
 
     if (usuario == null) {
-      throw new IllegalArgumentException("El usuario no existe.");
+      throw new IllegalArgumentException("Error de Autenticación: El usuario no existe.");
     }
 
     if (!usuario.getContrasenia().equals(clave)) {
-      throw new IllegalArgumentException("La contraseña no es válida.");
+      throw new IllegalArgumentException("Error de Autenticación: La contraseña no es válida.");
     }
 
     return usuario;
